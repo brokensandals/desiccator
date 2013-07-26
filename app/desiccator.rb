@@ -1,8 +1,6 @@
 class Desiccator < Sinatra::Base
   require 'sinatra/reloader' if development?
 
-  include ActionView::Helpers::DateHelper
-
   register Sinatra::ActiveRecordExtension
   set :database, {adapter: 'sqlite3', database: 'db.sqlite3'}
   set :views, File.dirname(__FILE__) + '/../views'

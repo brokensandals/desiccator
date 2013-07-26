@@ -11,7 +11,7 @@ html
           td Incomplete
           td Completed
           td Due
-      - for review in user.reviews
+      - for review in user.reviews.order('state desc, due_at asc')
         tr.pull
           td.repo
             a href="#{GITHUB_BASE}/#{review.repo}"
@@ -28,4 +28,4 @@ html
               - for reviewer in review.reviewers.select(&:completed_at)
                 == slim :_avatar, locals: {user: reviewer.user}
           - if review.due_at
-            td.due= distance_of_time_in_words_to_now(review.due_at)
+            td.due= due_date_text(review.due_at)

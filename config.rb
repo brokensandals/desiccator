@@ -14,6 +14,7 @@ require 'octokit'
 require 'active_record'
 require './lib/manager'
 require './app/desiccator'
+require './app/helpers'
 
 require './models/review'
 require './models/reviewer'
