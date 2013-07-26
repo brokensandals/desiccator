@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title whatever
+  body
+    table.pulls
+      th
+        tr
+          td Repository
+          td Pull Request
+          td Incomplete
+          td Completed
+          td Due
+      - for review in user.reviews
+        tr.pull
+          td.repo
+            a href="#{GITHUB_BASE}/#{review.repo}"
+              = review.repo
+          td.title
+            a href="#{GITHUB_BASE}/#{review.repo}/pull/#{review.pull_number}"
+              = review.title
+          td.incomplete
+            ul.reviewers
+              - for reviewer in review.reviewers.reject(&:completed_at)
+                img.avatar src=reviewer.user.image_url title=reviewer.user.name
+          td.completed
+            ul.reviewers
+              - for reviewer in review.reviewers.select(&:completed_at)
+                img.avatar src=reviewer.user.image_url title=reviewer.user.name
+          - if review.due_at
+            td.due= distance_of_time_in_words_to_now(review.due_at)

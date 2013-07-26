@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'octokit'
+gem 'sinatra'
+gem 'rspec'
+gem 'sinatra-activerecord'
+gem 'sqlite3'
+gem 'rake'
+gem 'slim'
+gem 'actionpack'
+gem 'rufus-scheduler'
+gem 'sinatra-contrib'
