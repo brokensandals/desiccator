@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title whatever
+    title= "Pulls - #{user.login}"
   body
     table.pulls
       th
@@ -22,10 +22,10 @@ html
           td.incomplete
             ul.reviewers
               - for reviewer in review.reviewers.reject(&:completed_at)
-                img.avatar src=reviewer.user.image_url title=reviewer.user.name
+                == slim :_avatar, locals: {user: reviewer.user}
           td.completed
             ul.reviewers
               - for reviewer in review.reviewers.select(&:completed_at)
-                img.avatar src=reviewer.user.image_url title=reviewer.user.name
+                == slim :_avatar, locals: {user: reviewer.user}
           - if review.due_at
             td.due= distance_of_time_in_words_to_now(review.due_at)
