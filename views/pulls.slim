@@ -14,10 +14,10 @@ html
       - for review in user.reviews.order('state desc, due_at asc')
         tr.pull
           td.repo
-            a href="#{GITHUB_BASE}/#{review.repo}"
-              = review.repo
+            a href="#{GITHUB_BASE}/#{review.repo.path}"
+              = review.repo.path
           td.title
-            a href="#{GITHUB_BASE}/#{review.repo}/pull/#{review.pull_number}"
+            a href="#{GITHUB_BASE}/#{review.repo.path}/pull/#{review.pull_number}"
               = review.title
           td.incomplete
             ul.reviewers

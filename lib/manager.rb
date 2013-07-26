@@ -9,24 +9,28 @@ class Manager
   def crawl(owner)
     puts "Crawling #{owner}"
     @octokit.repositories(owner).each do |repo_details|
-      repo = "#{owner}/#{repo_details.name}"
-      puts "Crawling #{repo}"
-      pulls = (@octokit.pull_requests(repo) + @octokit.pull_requests(repo, 'closed'))
+      repo = sync_repo(owner, repo_details.name)
+      puts "Crawling #{repo.path}"
+      pulls = (@octokit.pull_requests(repo.path) + @octokit.pull_requests(repo.path, 'closed'))
       pulls.each do |pull|
-        puts "Crawling #{repo} pull #{pull.number}"
+        puts "Crawling #{repo.path} pull #{pull.number}"
         sync_review(repo, pull)
       end
     end
   end
 
+  def sync_repo(owner, name)
+    Repo.where(user_id: sync_user(owner).id, name: name).first_or_create
+  end
+
   def sync_review(repo, pull)
-    review = Review.where(repo: repo, pull_number: pull.number).first_or_create
+    review = repo.reviews.where(pull_number: pull.number).first_or_create
     review.state = pull.state
     review.title = pull.title
     review.due_at = get_due_at(pull)
     review.save!
 
-    comments = @octokit.issue_comments(repo, pull.number)
+    comments = @octokit.issue_comments(repo.path, pull.number)
     sync_reviewers(review, pull, comments)
   end
 
