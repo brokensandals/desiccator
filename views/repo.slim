@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title= repo.path
+  body
+    form action="/repos/#{repo.path}" method="post"
+      input type="hidden" name="_method" value="put"
+      p
+        | Default reviewers:
+        input type="text" name="repo[default_reviewers]" value=repo.default_reviewers
+      p
+        | Default review duration:
+        input type="text" name="repo[default_review_duration]" value=repo.default_review_duration
+      input type="submit" value="Save"

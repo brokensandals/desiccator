@@ -12,7 +12,10 @@ require 'sinatra/base'
 require 'slim'
 require 'octokit'
 require 'active_record'
+require 'chronic_duration'
+require 'business_time'
 
+require File.expand_path('../lib/date_util', __FILE__)
 require File.expand_path('../lib/manager', __FILE__)
 
 require File.expand_path('../models/repo', __FILE__)
@@ -26,6 +29,7 @@ class Desiccator < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :database, {adapter: 'sqlite3', database: File.expand_path('../db/db.sqlite3', __FILE__)}
   set :views, File.expand_path('../views', __FILE__)
+  set :method_override, true
 
 end
 

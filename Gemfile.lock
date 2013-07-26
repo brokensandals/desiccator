@@ -27,6 +27,11 @@ GEM
     atomic (1.1.10)
     backports (3.3.1)
     builder (3.1.4)
+    business_time (0.6.1)
+      activesupport (>= 3.1.0)
+      tzinfo (~> 0.3.31)
+    chronic_duration (0.10.2)
+      numerizer (~> 0.1.1)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -40,6 +45,7 @@ GEM
     multi_json (1.7.7)
     multipart-post (1.2.0)
     netrc (0.7.7)
+    numerizer (0.1.1)
     octokit (1.25.0)
       addressable (~> 2.2)
       faraday (~> 0.8)
@@ -92,6 +98,8 @@ PLATFORMS
 
 DEPENDENCIES
   actionpack
+  business_time
+  chronic_duration
   octokit
   rake
   rspec

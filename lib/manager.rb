@@ -27,7 +27,7 @@ class Manager
     review = repo.reviews.where(pull_number: pull.number).first_or_create
     review.state = pull.state
     review.title = pull.title
-    review.due_at = get_due_at(pull)
+    review.due_at = get_due_at(repo, pull)
     review.save!
 
     comments = @octokit.issue_comments(repo.path, pull.number)
@@ -36,8 +36,9 @@ class Manager
 
   def sync_reviewers(review, pull, comments)
     pull.body =~ /^Reviewers: (.+)$/
-    return unless $1
-    $1.split(/[\s,]+/).map do |id|
+    reviewers_string = "#{$1} #{review.repo.default_reviewers}"
+    reviewers_string.split(/[\s,]+/).map do |id|
+      next if id.blank?
       login = id.sub('@', '').downcase
       next unless user = sync_user(login) # TODO don't call this as often
       completion = comments.detect {|c| c.body == '+1' && c.user.login.downcase == login}
@@ -59,8 +60,17 @@ class Manager
     user
   end
 
-  def get_due_at(pull)
+  def get_due_at(repo, pull)
+    # This is bad and I feel bad
+    # but I think it's good enough for the moment
+    # maybe
+    from = DateTime.iso8601(pull.created_at).new_offset('CST') # FIXME
+
     pull.body =~ /^Due: (.+)\s*$/
-    $1
+    return DateUtil.parse(from, $1.chomp) if $1
+    repo.default_due_at(from)
+  rescue => ex
+    puts ex
+    nil
   end
 end
