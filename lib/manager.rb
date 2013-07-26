@@ -8,7 +8,7 @@ class Manager
 
   def crawl(owner)
     puts "Crawling #{owner}"
-    @octokit.repositories(owner).each do |repo_details|
+    all_repositories(owner).each do |repo_details|
       repo = sync_repo(owner, repo_details.name)
       puts "Crawling #{repo.path}"
       pulls = (@octokit.pull_requests(repo.path) + @octokit.pull_requests(repo.path, 'closed'))
@@ -17,6 +17,18 @@ class Manager
         sync_review(repo, pull)
       end
     end
+  end
+
+  def all_repositories(owner)
+    repos = []
+    page = 1
+    while true
+      batch = @octokit.repositories(owner, page: page, per_page: 100)
+      page += 1
+      repos += batch
+      break if batch.count < 100
+    end
+    repos
   end
 
   def sync_repo(owner, name)
