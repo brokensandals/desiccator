@@ -10,11 +10,13 @@ Run with Rack. Syncs data to a SQLite database.
 If you wish, include lines like these in your pull request description:
 
 > Reviewers: @brokensandals @sun16
+
 > Due: 2013-07-29
 
 Due date can also be specified as a duration from the creation time:
 
 > Due: 5 hours
+
 > Due: 1 business day
 
 # Completion
