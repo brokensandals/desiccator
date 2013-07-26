@@ -1,4 +1,4 @@
-require './config'
+require File.expand_path('../app', __FILE__)
 
 SCHEDULER = Rufus::Scheduler.start_new
 MANAGER = Manager.new(GITHUB_API_BASE)

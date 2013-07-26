@@ -1,2 +1,2 @@
 require 'sinatra/activerecord/rake'
-require './config'
+require File.expand_path('../app', __FILE__)
