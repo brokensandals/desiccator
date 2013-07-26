@@ -3,7 +3,6 @@ CONFIG = YAML.load_file(File.dirname(__FILE__) + '/config.yaml')
 GITHUB_BASE = CONFIG['github']
 GITHUB_API_BASE = CONFIG['github_api']
 CRAWL_INTERVAL = CONFIG['crawl_interval']
-CRAWL_OWNERS = CONFIG['crawl_owners']
 
 require 'rufus-scheduler'
 require 'action_view'
@@ -35,3 +34,5 @@ end
 
 require File.expand_path('../app/routes', __FILE__)
 require File.expand_path('../app/helpers', __FILE__)
+
+MANAGER = Manager.new(GITHUB_API_BASE)

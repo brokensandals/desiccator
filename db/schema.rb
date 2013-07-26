@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726050130) do
+ActiveRecord::Schema.define(version: 20130726132103) do
 
   create_table "repos", force: true do |t|
     t.integer "user_id"
@@ -40,11 +40,13 @@ ActiveRecord::Schema.define(version: 20130726050130) do
   add_index "reviews", ["repo_id", "pull_number"], name: "index_reviews_on_repo_id_and_pull_number", unique: true
 
   create_table "users", force: true do |t|
-    t.text   "name"
-    t.string "login"
-    t.string "image_url"
+    t.text    "name"
+    t.string  "login"
+    t.string  "image_url"
+    t.boolean "crawl_repos", default: false, null: false
   end
 
+  add_index "users", ["crawl_repos"], name: "index_users_on_crawl_repos"
   add_index "users", ["login"], name: "index_users_on_login", unique: true
 
 end

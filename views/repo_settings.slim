@@ -3,7 +3,7 @@ html
   head
     title= repo.path
   body
-    form action="/repos/#{repo.path}" method="post"
+    form action="/repos/#{repo.path}/settings" method="post"
       input type="hidden" name="_method" value="put"
       p
         | Default reviewers:

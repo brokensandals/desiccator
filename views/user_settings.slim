@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title= user.login
+  body
+    form action="/users/#{user.login}/settings" method="post"
+      input type="hidden" name="_method" value="put"
+      p
+        input type="hidden" name="user[crawl_repos]" value="false"
+        input#crawl_repos type="checkbox" name="user[crawl_repos]" value="true" checked=user.crawl_repos
+        label name="user[crawl_repos]" for="crawl_repos" Crawl Repositories Periodically
+      input type="submit" value="Save"
+    form action="/users/#{user.login}/crawl" method="post"
+      input type="submit" value="Crawl Now"
