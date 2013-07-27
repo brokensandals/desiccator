@@ -3,8 +3,8 @@ class Desiccator < Sinatra::Base
     slim :home
   end
 
-  get '/users/:login/pulls' do
-    slim :pulls, locals: {user: User.find_by_login(params[:login])}
+  get '/users/:login/reviews' do
+    slim :open_reviews, locals: {user: User.find_by_login(params[:login])}
   end
 
   get '/users/:login/settings' do

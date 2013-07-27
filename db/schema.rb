@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130727165143) do
+ActiveRecord::Schema.define(version: 20130727170334) do
 
   create_table "repos", force: true do |t|
     t.integer "user_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20130727165143) do
     t.integer  "pull_number"
     t.text     "title"
     t.datetime "due_at"
+    t.integer  "user_id"
   end
 
   add_index "reviews", ["repo_id", "pull_number"], name: "index_reviews_on_repo_id_and_pull_number", unique: true

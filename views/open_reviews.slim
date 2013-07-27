@@ -1,0 +1,9 @@
+doctype html
+html
+  head
+    title= "Open - #{user.login}"
+  body
+    h1 Created
+    == slim :_reviews, locals: {reviews: user.owned_reviews.where(state: 'open')}
+    h1 Reviewing
+    == slim :_reviews, locals: {reviews: user.reviewer_reviews.where(state: 'open')}
