@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130727170334) do
+ActiveRecord::Schema.define(version: 20130727173958) do
 
   create_table "repos", force: true do |t|
     t.integer "user_id"
     t.string  "name"
     t.text    "default_reviewers"
     t.string  "default_review_duration"
+    t.string  "name_key"
   end
 
-  add_index "repos", ["user_id", "name"], name: "index_repos_on_user_id_and_name", unique: true
+  add_index "repos", ["user_id", "name_key"], name: "index_repos_on_user_id_and_name_key", unique: true
 
   create_table "reviewer_statuses", force: true do |t|
     t.integer  "review_id"
@@ -45,9 +46,10 @@ ActiveRecord::Schema.define(version: 20130727170334) do
     t.string  "login"
     t.string  "image_url"
     t.boolean "crawl_repos", default: false, null: false
+    t.string  "login_key"
   end
 
   add_index "users", ["crawl_repos"], name: "index_users_on_crawl_repos"
-  add_index "users", ["login"], name: "index_users_on_login", unique: true
+  add_index "users", ["login_key"], name: "index_users_on_login_key", unique: true
 
 end

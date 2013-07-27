@@ -34,7 +34,10 @@ class Manager
   end
 
   def sync_repo(owner, name)
-    Repo.where(user_id: sync_user(owner).id, name: name).first_or_create
+    repo = Repo.where(user_id: sync_user(owner).id, name_key: name.downcase).first_or_create
+    repo.name = name
+    repo.save!
+    repo
   end
 
   def sync_review(repo, pull)
@@ -54,10 +57,10 @@ class Manager
     reviewers_string = "#{$1} #{review.repo.default_reviewers}"
     reviewers_string.split(/[\s,]+/).map do |id|
       next if id.blank?
-      login = id.sub('@', '').downcase
+      login = id.sub('@', '')
       next unless user = sync_user(login) # TODO don't call this as often
       next if user == review.user # can't be a reviewer on your own review
-      completion = comments.detect {|c| COMPLETION_COMMENTS.include?(c.body.strip) && c.user.login.downcase == login}
+      completion = comments.detect {|c| COMPLETION_COMMENTS.include?(c.body.strip) && c.user.login.downcase == login.downcase}
       reviewer_status = review.reviewer_statuses.where(user_id: user.id).first_or_create
       reviewer_status.completed_at = (completion.created_at if completion)
       reviewer_status.save!
@@ -69,7 +72,8 @@ class Manager
   def sync_user(login)
     github_user = @octokit.user(login)
     return nil unless github_user
-    user = User.where(login: login).first_or_create
+    user = User.where(login_key: login.downcase).first_or_create
+    user.login = github_user.login
     user.name = github_user.name
     user.image_url = github_user.avatar_url
     user.save!
