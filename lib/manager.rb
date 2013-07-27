@@ -1,4 +1,6 @@
 class Manager
+  COMPLETION_COMMENTS = ['+1', ':+1:']
+
   def initialize(base_url)
     Octokit.configure do |c|
       c.api_endpoint = base_url
@@ -55,7 +57,7 @@ class Manager
       login = id.sub('@', '').downcase
       next unless user = sync_user(login) # TODO don't call this as often
       next if user == review.user # can't be a reviewer on your own review
-      completion = comments.detect {|c| c.body == '+1' && c.user.login.downcase == login}
+      completion = comments.detect {|c| COMPLETION_COMMENTS.include?(c.body.strip) && c.user.login.downcase == login}
       reviewer_status = review.reviewer_statuses.where(user_id: user.id).first_or_create
       reviewer_status.completed_at = (completion.created_at if completion)
       reviewer_status.save!
