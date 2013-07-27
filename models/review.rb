@@ -1,4 +1,4 @@
 class Review < ActiveRecord::Base
   belongs_to :repo
-  has_many :reviewers
+  has_many :reviewer_statuses
 end

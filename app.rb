@@ -19,7 +19,7 @@ require File.expand_path('../lib/manager', __FILE__)
 
 require File.expand_path('../models/repo', __FILE__)
 require File.expand_path('../models/review', __FILE__)
-require File.expand_path('../models/reviewer', __FILE__)
+require File.expand_path('../models/reviewer_status', __FILE__)
 require File.expand_path('../models/user', __FILE__)
 
 class Desiccator < Sinatra::Base

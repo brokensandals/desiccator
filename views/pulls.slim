@@ -21,11 +21,11 @@ html
               = review.title
           td.incomplete
             ul.reviewers
-              - for reviewer in review.reviewers.reject(&:completed_at)
-                == slim :_avatar, locals: {user: reviewer.user}
+              - for status in review.reviewer_statuses.reject(&:completed_at)
+                == slim :_avatar, locals: {user: status.user}
           td.completed
             ul.reviewers
-              - for reviewer in review.reviewers.select(&:completed_at)
-                == slim :_avatar, locals: {user: reviewer.user}
+              - for status in review.reviewer_statuses.select(&:completed_at)
+                == slim :_avatar, locals: {user: status.user}
           - if review.due_at
             td.due= due_date_text(review.due_at)

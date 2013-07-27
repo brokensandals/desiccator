@@ -43,10 +43,10 @@ class Manager
     review.save!
 
     comments = @octokit.issue_comments(repo.path, pull.number)
-    sync_reviewers(review, pull, comments)
+    sync_reviewer_statuses(review, pull, comments)
   end
 
-  def sync_reviewers(review, pull, comments)
+  def sync_reviewer_statuses(review, pull, comments)
     pull.body =~ /^Reviewers: (.+)$/
     reviewers_string = "#{$1} #{review.repo.default_reviewers}"
     reviewers_string.split(/[\s,]+/).map do |id|
@@ -54,9 +54,9 @@ class Manager
       login = id.sub('@', '').downcase
       next unless user = sync_user(login) # TODO don't call this as often
       completion = comments.detect {|c| c.body == '+1' && c.user.login.downcase == login}
-      reviewer = review.reviewers.where(user_id: user.id).first_or_create
-      reviewer.completed_at = (completion.created_at if completion)
-      reviewer.save!
+      reviewer_status = review.reviewer_statuses.where(user_id: user.id).first_or_create
+      reviewer_status.completed_at = (completion.created_at if completion)
+      reviewer_status.save!
     end
 
     # TODO delete old reviewers?
