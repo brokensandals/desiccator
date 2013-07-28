@@ -8,6 +8,7 @@ require 'rufus-scheduler'
 require 'action_view'
 require 'sinatra/activerecord'
 require 'sinatra/base'
+require 'sinatra/content_for'
 require 'slim'
 require 'octokit'
 require 'active_record'
@@ -32,6 +33,7 @@ class Desiccator < Sinatra::Base
 
 end
 
+require File.expand_path('../app/assets', __FILE__)
 require File.expand_path('../app/routes', __FILE__)
 require File.expand_path('../app/helpers', __FILE__)
 

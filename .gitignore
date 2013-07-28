@@ -1,0 +1,11 @@
+# Ignore the default SQLite database.
+/db/*.sqlite3
+
+# OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Don't commit config.yaml
+config.yaml
