@@ -1,5 +1,6 @@
 - title "Open - #{user.login}"
-h1 Created
+h3 Created
 == slim :_reviews, locals: {reviews: user.owned_reviews.where(state: 'open')}
-h1 Reviewing
+<hr>
+h3 Reviewing
 == slim :_reviews, locals: {reviews: user.reviewer_reviews.where(state: 'open')}

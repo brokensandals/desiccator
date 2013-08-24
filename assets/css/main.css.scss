@@ -1,10 +1,52 @@
+body{
+	margin: 0 100px;
+}
 .avatar {
-  width: 48px;
-  height: 48px;
+	width: 48px;
+	height: 48px;
+	border-radius: 6px 6px 6px 6px;
+	-moz-border-radius: 6px 6px 6px 6px;
+	-webkit-border-radius: 6px 6px 6px 6px;
 }
 
 .reviews {
-  td {
-    border: 1px solid black;
-  }
+    border: 1px solid #CCCCCC;
+    border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 1px 1px #CCCCCC;
+    border-spacing: 0;
+    width: 600px;
+    margin: 30px;
+
+	td, th {
+	    border-left: 1px solid #CCCCCC;
+	    border-top: 1px solid #CCCCCC;
+	    padding: 10px;
+	    text-align: left;
+	}	
+	th {
+	    background-color: #DCE9F9;
+	    background-image: -moz-linear-gradient(center top , #F8F8F8, #ECECEC);
+	    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#F8F8F8), to(#ECECEC), color-stop(.4, #F8F8F8));
+	    border-top: medium none;
+	    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+	    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	    padding: 20px;
+	}
+	td:first-child, th:first-child {
+	    border-left: medium none;
+	}
+	th:first-child {
+	    border-radius: 6px 0 0 0;
+	    -moz-border-radius: 6px 0 0 0;
+	    -webkit-border-radius: 6px 0 0 0;
+	}
+
+	th:last-child {
+	    border-radius: 0 6px 0 0;
+	    -moz-border-radius: 0 6px 0 0;
+	    -webkit-border-radius: 0 6px 0 0;
+	}
+
 }
