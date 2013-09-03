@@ -1,10 +1,73 @@
-.avatar {
-  width: 48px;
-  height: 48px;
+body{
+	margin: 0 100px;
 }
 
-.reviews {
-  td {
-    border: 1px solid black;
-  }
+.avatar{
+	width: 48px;
+	height: 48px;
+	border:1px solid #000;
+}
+
+.created{
+	border-bottom: double #ECECEC;
+}
+
+.reviewing{
+	border-top: 1px solid #DCDCDC;
+}
+
+.created, .reviewing{
+	h3{
+		color: #5C8722;
+		font-size: 40px;
+		font-weight: 100;
+		text-shadow: 0 1px 0 rgba(36, 90, 228, 0.5);
+	}	
+}
+
+
+.reviews{
+	margin: 20px 0 50px ;
+    border-color: #CCCCCC;
+    border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 1px 1px #CCCCCC;
+    
+    .review{
+    	font-family: serif;
+    	font-size: 16px;
+
+    	td{
+    		vertical-align: middle;
+    	}
+
+    	a:hover{			
+			text-decoration: none;
+    	}
+    }
+	
+	td{
+	    padding: 10px;
+	    text-align: left;	
+	    &.no_due{
+			color: #D3D3D3;
+			font-family: fantasy;
+		}
+	}
+
+	th{
+	    background-color: #DCE9F9;
+	    background-image: -moz-linear-gradient(center top , #F8F8F8, #ECECEC);
+	    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#F8F8F8), to(#ECECEC), color-stop(.4, #F8F8F8));
+	    border-top: medium none;
+	    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+	    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	    padding: 20px;
+	    font-size: 20px;
+		font-weight: 200;
+	}
+	.reviewers{
+		padding-left: 0px;
+	}
 }

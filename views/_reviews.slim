@@ -1,11 +1,10 @@
-table.reviews
-  th
-    tr
-      td Repository
-      td Pull Request
-      td Incomplete
-      td Completed
-      td Due
+table.table.table-bordered.reviews
+  tr
+    th Repository
+    th Pull Request
+    th Incomplete
+    th Completed
+    th Due
   - for review in reviews.order('state desc, due_at asc')
     tr.review
       td.repo
@@ -21,6 +20,8 @@ table.reviews
       td.completed
         ul.reviewers
           - for status in review.reviewer_statuses.select(&:completed_at)
-            == slim :_avatar, locals: {user: status.user}
-      - if review.due_at
-        td.due= due_date_text(review.due_at)
+            == slim :_avatar, locals: {user: status.user}      
+        - if review.due_at
+            td.due= due_date_text(review.due_at)
+        - else
+            td.no_due= 'Due date not set'
