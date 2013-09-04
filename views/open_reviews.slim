@@ -1,7 +1,7 @@
 - title "Desiccator - #{user.login}"
 div.created
-	h3 Created
+	h1 Created
 	== slim :_reviews, locals: {reviews: user.owned_reviews.where(state: 'open')}
 div.reviewing
-	h3 Reviewing
+	h1 Reviewing
 	== slim :_reviews, locals: {reviews: user.reviewer_reviews.where(state: 'open')}
