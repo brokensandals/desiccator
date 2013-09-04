@@ -9,3 +9,5 @@ Icon
 
 # Don't commit config.yaml
 config.yaml
+
+.sass-cache/
