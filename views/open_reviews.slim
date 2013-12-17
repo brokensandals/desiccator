@@ -1,10 +1,13 @@
 - title "Desiccator - #{user.login}"
-div.created
-	h1 Created
-	== slim :_reviews, locals: {reviews: user.owned_reviews.where(state: 'open')}
-div.reviewing
-	h1 Reviewing
-	== slim :_reviews, locals: {reviews: user.incomplete_reviews}
-div.completed
-  h1 Completed
-  == slim :_reviews, locals: {reviews: user.complete_reviews}
+- unless (owned = user.owned_reviews.where(state: 'open')).empty?
+  div.created
+  	h1 Created
+  	== slim :_reviews, locals: {reviews: owned}
+- unless (reviewing = user.incomplete_reviews).empty?
+  div.reviewing
+  	h1 Reviewing
+  	== slim :_reviews, locals: {reviews: reviewing}
+- unless (completed = user.complete_reviews).empty?
+  div.completed
+    h1 Completed
+    == slim :_reviews, locals: {reviews: completed}
