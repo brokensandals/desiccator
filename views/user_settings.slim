@@ -6,7 +6,7 @@ form action="/users/#{user.login}/settings" method="post"
     input#crawl_repos type="checkbox" name="user[crawl_repos]" value="true" checked=user.crawl_repos
     label name="user[crawl_repos]" for="crawl_repos" Crawl Repositories Periodically
   p
-    Watch all repos owned by these users:
+    | Watch all repos owned by these users:
     input name="user[repo_owner_watches_string]" value=user.repo_owner_watches_string
   input type="submit" value="Save"
 form action="/users/#{user.login}/crawl" method="post"
