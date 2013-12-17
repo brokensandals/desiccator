@@ -19,6 +19,7 @@ require File.expand_path('../lib/date_util', __FILE__)
 require File.expand_path('../lib/manager', __FILE__)
 
 require File.expand_path('../models/repo', __FILE__)
+require File.expand_path('../models/repo_owner_watch', __FILE__)
 require File.expand_path('../models/review', __FILE__)
 require File.expand_path('../models/reviewer_status', __FILE__)
 require File.expand_path('../models/user', __FILE__)

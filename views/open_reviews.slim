@@ -11,3 +11,7 @@
   div.completed
     h1 Completed
     == slim :_reviews, locals: {reviews: completed}
+- unless (watching = user.open_watched_reviews).empty?
+  div.watching
+    h1 Watching
+    == slim :_reviews, locals: {reviews: watching}

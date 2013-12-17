@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130727173958) do
+ActiveRecord::Schema.define(version: 20131217013137) do
+
+  create_table "repo_owner_watches", force: true do |t|
+    t.integer "user_id"
+    t.integer "watched_user_id"
+  end
 
   create_table "repos", force: true do |t|
     t.integer "user_id"
