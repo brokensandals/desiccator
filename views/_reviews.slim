@@ -1,5 +1,6 @@
 table.table.table-bordered.reviews
   tr
+    th Owner
     th Repository
     th Pull Request
     th Incomplete
@@ -7,6 +8,8 @@ table.table.table-bordered.reviews
     th Due
   - for review in reviews.order('state desc, due_at asc')
     tr.review
+      td.owner
+        == slim :_avatar, locals: {user: review.user}
       td.repo
         a href="#{GITHUB_BASE}/#{review.repo.path}"
           = review.repo.path
