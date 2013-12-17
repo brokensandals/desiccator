@@ -7,7 +7,7 @@ table.table.table-bordered.reviews
     th Completed
     th Due
   - for review in reviews.sort_by {|rev| rev.due_at.to_s}
-    tr.review
+    tr.review class=('overdue' if review.overdue?)
       td.owner
         == slim :_avatar, locals: {user: review.user}
       td.repo
