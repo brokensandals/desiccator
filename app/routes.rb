@@ -3,11 +3,6 @@ class Desiccator < Sinatra::Base
     slim :home
   end
 
-  get '/:login' do
-    return 404 unless user = MANAGER.sync_user(params[:login])
-    slim :summary, locals: {user: user}
-  end
-
   get '/users/:login/reviews' do
     slim :open_reviews, locals: {user: User.find_by_login_key(params[:login].downcase)}
   end
