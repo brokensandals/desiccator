@@ -4,4 +4,7 @@ div.created
 	== slim :_reviews, locals: {reviews: user.owned_reviews.where(state: 'open')}
 div.reviewing
 	h1 Reviewing
-	== slim :_reviews, locals: {reviews: user.reviewer_reviews.where(state: 'open')}
+	== slim :_reviews, locals: {reviews: user.incomplete_reviews}
+div.completed
+  h1 Completed
+  == slim :_reviews, locals: {reviews: user.complete_reviews}

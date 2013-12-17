@@ -6,7 +6,7 @@ table.table.table-bordered.reviews
     th Incomplete
     th Completed
     th Due
-  - for review in reviews.order('state desc, due_at asc')
+  - for review in reviews.sort_by(&:due_at)
     tr.review
       td.owner
         == slim :_avatar, locals: {user: review.user}
