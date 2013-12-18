@@ -6,6 +6,7 @@ body{
 	width: 48px;
 	height: 48px;
 	border:1px solid #000;
+  margin: 2px;
 }
 
 .created{
@@ -16,7 +17,7 @@ body{
 	border-top: 1px solid #DCDCDC;
 }
 
-.created, .reviewing{
+.created, .reviewing, .completed, .watching {
 	h1{
 		color: #5C8722;
 		font-size: 40px;
