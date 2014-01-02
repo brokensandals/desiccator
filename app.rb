@@ -31,6 +31,7 @@ class Desiccator < Sinatra::Base
   set :database, {adapter: 'sqlite3', database: File.expand_path('../db/db.sqlite3', __FILE__)}
   set :views, File.expand_path('../views', __FILE__)
   set :method_override, true
+  enable :logging
 
 end
 
