@@ -32,6 +32,7 @@ class Desiccator < Sinatra::Base
   set :views, File.expand_path('../views', __FILE__)
   set :method_override, true
   enable :logging
+  enable :dump_errors
 
 end
 
