@@ -13,11 +13,12 @@ class Manager
     all_repositories(owner).each do |repo_details|
       repo = sync_repo(owner, repo_details.name)
       puts "Crawling #{repo.path}"
-      pulls = (@octokit.pull_requests(repo.path) + @octokit.pull_requests(repo.path, 'closed'))
-      pulls.each do |pull|
+      open_pulls = @octokit.pull_requests(repo.path)
+      open_pulls.each do |pull|
         puts "Crawling #{repo.path} pull #{pull.number}"
         sync_review(repo, pull)
       end
+      sync_reviews_assumed_closed(repo, open_pulls.map(&:number))
     end
   end
 
@@ -52,6 +53,16 @@ class Manager
     sync_reviewer_statuses(review, pull, comments)
   end
 
+  def sync_reviews_assumed_closed(repo, open_pull_numbers)
+    to_close = repo.reviews.where(state: 'open')
+    to_close = to_close.where('pull_number not in (?)', open_pull_numbers) unless open_pull_numbers.blank?
+    to_close.each do |review|
+      puts "Assuming repo #{repo.path} review #{review.pull_number} is closed"
+      review.state = 'closed'
+      review.save!
+    end
+  end
+
   def sync_reviewer_statuses(review, pull, comments)
     pull.body =~ /^Reviewers: (.+)$/
     reviewers_string = "#{$1} #{review.repo.default_reviewers}"
@@ -70,7 +81,7 @@ class Manager
   end
 
   def sync_user(login)
-    github_user = @octokit.user(login)
+    github_user = @octokit.user(login) rescue nil
     return nil unless github_user
     user = User.where(login_key: login.downcase).first_or_create
     user.login = github_user.login
